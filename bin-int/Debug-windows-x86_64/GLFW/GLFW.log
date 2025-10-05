@@ -1,0 +1,4 @@
+﻿cl : command line  warning D9002: ignoring unknown option '-std=c11'
+cl : command line  warning D9002: ignoring unknown option '-lgdi32'
+  context.c
+  GLFW.vcxproj -> C:\Users\aiuan\source\repos\AirPoker\AirPoker\vendor\GLFW\bin\Debug-windows-x86_64\GLFW\GLFW.lib
