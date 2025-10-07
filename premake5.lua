@@ -4,6 +4,7 @@ project "GLFW"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    staticruntime "on"
 
     -- These are the common files required by ALL platforms.
     -- This now includes the complete "null" backend and common context APIs.
@@ -35,7 +36,6 @@ project "GLFW"
     filter "system:linux"
         pic "On"
         systemversion "latest"
-        staticruntime "On"
 
         -- Platform-specific files for Linux (X11)
         files
@@ -53,11 +53,10 @@ project "GLFW"
         defines { "_GLFW_X11" }
 
 ---
-
     filter "system:windows"
-		buildoptions {"-std=c11", "-lgdi32"}
+        defines { "_GLFW_WIN32" }
+		-- buildoptions {"-std=c11", "-lgdi32"}
         systemversion "latest"
-        staticruntime "On"
 
         -- Platform-specific files for Windows
         files
@@ -69,7 +68,10 @@ project "GLFW"
             "src/win32_thread.c",
             "src/win32_window.c",
             "src/win32_module.c",
-            "src/wgl_context.c"
+            "src/wgl_context.c",
+            -- newly added
+            "src/egl_context.c",
+            "src/osmesa_context.c"
         }
 
         defines 
@@ -78,7 +80,6 @@ project "GLFW"
             "_CRT_SECURE_NO_WARNINGS"
         }
 
----
 
     filter "configurations:Debug"
         runtime "Debug"
